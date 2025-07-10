@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Happy Birthday Subhadra! 🎉</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #f9d423 0%, #ff4e50 100%);
+      font-family: 'Segoe Script', 'Comic Sans MS', cursive, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      overflow-x: hidden;
+    }
+    .confetti {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      pointer-events: none;
+      z-index: 100;
+    }
+    .cake {
+      margin-top: 40px;
+      position: relative;
+      width: 180px;
+      height: 180px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: popIn 1.2s cubic-bezier(.68,-0.55,.27,1.55);
+    }
+    .cake-base {
+      width: 160px;
+      height: 60px;
+      background: linear-gradient(90deg, #ffb347 60%, #ffcc80 100%);
+      border-radius: 0 0 80px 80px / 0 0 60px 60px;
+      position: absolute;
+      bottom: 0;
+      left: 10px;
+      box-shadow: 0 8px 32px #ffb34788;
+      z-index: 2;
+    }
+    .cake-layer {
+      width: 140px;
+      height: 40px;
+      background: linear-gradient(90deg, #fff 60%, #ffe0b2 100%);
+      border-radius: 70px 70px 40px 40px / 40px 40px 30px 30px;
+      position: absolute;
+      bottom: 50px;
+      left: 20px;
+      z-index: 3;
+      box-shadow: 0 4px 16px #fff8;
+    }
+    .cake-icing {
+      width: 140px;
+      height: 24px;
+      background: linear-gradient(90deg, #ff69b4 60%, #ffb6c1 100%);
+      border-radius: 70px 70px 30px 30px / 24px 24px 20px 20px;
+      position: absolute;
+      bottom: 70px;
+      left: 20px;
+      z-index: 4;
+      box-shadow: 0 2px 8px #ff69b488;
+    }
+    .cake-candle {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 12px;
+      height: 38px;
+      background: repeating-linear-gradient(135deg, #fff, #fff 4px, #ff69b4 4px, #ff69b4 8px);
+      border-radius: 6px;
+      z-index: 5;
+      box-shadow: 0 1px 4px #ff69b488;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+    }
+    .cake-flame {
+      width: 16px;
+      height: 24px;
+      background: radial-gradient(ellipse at center, #fff700 60%, #ff9800 100%);
+      border-radius: 50% 50% 60% 60% / 60% 60% 100% 100%;
+      position: absolute;
+      top: -18px;
+      left: 50%;
+      transform: translateX(-50%) scale(1);
+      animation: flameFlicker 1.2s infinite alternate;
+      z-index: 6;
+      box-shadow: 0 0 18px 6px #fff70088;
+    }
+    @keyframes flameFlicker {
+      0% { transform: translateX(-50%) scale(1) rotate(-3deg);}
+      50% { transform: translateX(-50%) scale(1.08, 1.12) rotate(3deg);}
+      100% { transform: translateX(-50%) scale(1) rotate(-2deg);}
+    }
+    @keyframes popIn {
+      0% { opacity: 0; transform: scale(0.7) translateY(40px);}
+      80% { opacity: 1; transform: scale(1.08) translateY(-8px);}
+      100% { opacity: 1; transform: scale(1) translateY(0);}
+    }
+    .birthday-title {
+      margin-top: 30px;
+      font-size: 2.5em;
+      color: #fff;
+      text-shadow: 0 4px 24px #ff69b4cc, 0 1px 0 #fff;
+      letter-spacing: 2px;
+      animation: popIn 1.2s cubic-bezier(.68,-0.55,.27,1.55);
+      text-align: center;
+    }
+    .birthday-message {
+      margin: 30px 0 0 0;
+      background: rgba(255,255,255,0.85);
+      color: #d72660;
+      font-size: 1.25em;
+      border-radius: 24px;
+      box-shadow: 0 2px 18px #ffb6c1aa;
+      padding: 24px 28px;
+      max-width: 90vw;
+      text-align: center;
+      line-height: 1.7;
+      font-family: 'Segoe Script', 'Comic Sans MS', cursive, sans-serif;
+      animation: popIn 1.5s 0.2s cubic-bezier(.68,-0.55,.27,1.55) backwards;
+    }
+    .signature {
+      margin-top: 32px;
+      font-size: 1.1em;
+      color: #ff69b4;
+      font-family: 'Segoe Script', cursive;
+      text-align: center;
+      letter-spacing: 1px;
+      opacity: 0.85;
+    }
+    .balloon {
+      position: absolute;
+      width: 48px;
+      height: 64px;
+      z-index: 10;
+      animation: balloonFloat 6s infinite ease-in-out;
+    }
+    .balloon .string {
+      position: absolute;
+      left: 50%;
+      top: 60px;
+      width: 2px;
+      height: 32px;
+      background: #bdbdbd;
+      border-radius: 2px;
+      transform: translateX(-50%);
+    }
+    @keyframes balloonFloat {
+      0% { transform: translateY(0) scale(1);}
+      50% { transform: translateY(-40px) scale(1.05);}
+      100% { transform: translateY(0) scale(1);}
+    }
+    /* Responsive */
+    @media (max-width: 600px) {
+      .birthday-title { font-size: 1.3em; }
+      .birthday-message { font-size: 1em; padding: 16px 6vw; }
+      .cake { width: 120px; height: 120px; }
+      .cake-base, .cake-layer, .cake-icing { left: 0; right: 0; margin: auto; }
+      .signature { font-size: 1em; }
+    }
+  </style>
+</head>
+<body>
+  <canvas class="confetti" id="confetti"></canvas>
+  <!-- Balloons -->
+  <div class="balloon" style="left:10vw; top:30px; animation-delay:0s;">
+    <svg width="48" height="64">
+      <ellipse cx="24" cy="28" rx="20" ry="28" fill="#ff69b4" stroke="#d72660" stroke-width="2"/>
+    </svg>
+    <div class="string"></div>
+  </div>
+  <div class="balloon" style="left:80vw; top:60px; animation-delay:1.5s;">
+    <svg width="48" height="64">
+      <ellipse cx="24" cy="28" rx="20" ry="28" fill="#ffd700" stroke="#e6b800" stroke-width="2"/>
+    </svg>
+    <div class="string"></div>
+  </div>
+  <div class="balloon" style="left:50vw; top:10px; animation-delay:0.8s;">
+    <svg width="48" height="64">
+      <ellipse cx="24" cy="28" rx="20" ry="28" fill="#87ceeb" stroke="#4682b4" stroke-width="2"/>
+    </svg>
+    <div class="string"></div>
+  </div>
+  <!-- Cake -->
+  <div class="cake">
+    <!-- Bottom Layer -->
+    <div class="cake-base"></div>
+    <!-- Middle Layer -->
+    <div class="cake-layer" style="width:120px;height:32px;left:30px;bottom:80px;background:linear-gradient(90deg,#fff 60%,#ffe0b2 100%);border-radius:60px 60px 30px 30px/32px 32px 20px 20px;z-index:4;box-shadow:0 2px 8px #fff8;"></div>
+    <!-- Top Layer -->
+    <div class="cake-layer" style="width:80px;height:22px;left:50px;bottom:104px;background:linear-gradient(90deg,#fff 60%,#ffe0b2 100%);border-radius:40px 40px 18px 18px/22px 22px 12px 12px;z-index:5;box-shadow:0 1px 4px #fff8;"></div>
+    <!-- Bottom Icing -->
+    <div class="cake-icing"></div>
+    <!-- Middle Icing -->
+    <div class="cake-icing" style="width:120px;height:14px;left:30px;bottom:98px;background:linear-gradient(90deg,#ff69b4 60%,#ffb6c1 100%);border-radius:60px 60px 12px 12px/14px 14px 10px 10px;z-index:6;box-shadow:0 1px 4px #ff69b488;"></div>
+    <!-- Top Icing -->
+    <div class="cake-icing" style="width:80px;height:8px;left:50px;bottom:120px;background:linear-gradient(90deg,#ff69b4 60%,#ffb6c1 100%);border-radius:40px 40px 8px 8px/8px 8px 6px 6px;z-index:7;box-shadow:0 1px 2px #ff69b488;"></div>
+    <!-- Sprinkles -->
+    <div style="position:absolute;left:38px;bottom:74px;width:8px;height:8px;border-radius:50%;background:#ffd700;z-index:8;"></div>
+    <div style="position:absolute;left:60px;bottom:74px;width:8px;height:8px;border-radius:50%;background:#87ceeb;z-index:8;"></div>
+    <div style="position:absolute;left:82px;bottom:74px;width:8px;height:8px;border-radius:50%;background:#ff69b4;z-index:8;"></div>
+    <div style="position:absolute;left:104px;bottom:74px;width:8px;height:8px;border-radius:50%;background:#fff700;z-index:8;"></div>
+    <div style="position:absolute;left:126px;bottom:74px;width:8px;height:8px;border-radius:50%;background:#b39ddb;z-index:8;"></div>
+    <!-- Candle -->
+    <div class="cake-candle">
+      <div class="cake-flame"></div>
+    </div>
+  </div>
+  <div class="birthday-title">🎂 Happy Birthday Subhadra! 🎉</div>
+  <div class="birthday-message">
+    Wishing you a day filled with laughter, love, and all your favorite things! 🥳<br>
+    May your year ahead sparkle with joy, adventure, and endless possibilities. ✨<br>
+    You light up every room you enter, and your kindness touches every heart. 💖<br>
+    Keep shining, keep smiling, and may all your dreams come true! 🌈<br>
+    <span style="font-size:1.4em;">🎈🎁🍰💐</span>
+  </div>
+  <div class="signature">
+    With lots of love,<br>
+    Your Friend 💝
+  </div>
+  <script>
+    // Confetti animation
+    const canvas = document.getElementById('confetti');
+    const ctx = canvas.getContext('2d');
+    let W = window.innerWidth, H = window.innerHeight;
+    canvas.width = W; canvas.height = H;
+    let confettiPieces = [];
+    const colors = ['#ff69b4','#ffd700','#87ceeb','#ffb347','#ffcc80','#fff700','#ffb6c1','#fff'];
+
+    function ConfettiPiece() {
+      this.x = Math.random() * W;
+      this.y = Math.random() * H - H;
+      this.r = 6 + Math.random() * 8;
+      this.d = (Math.random() * 0.5) + 0.5;
+      this.color = colors[Math.floor(Math.random() * colors.length)];
+      this.tilt = Math.random() * 10 - 10;
+      this.tiltAngleIncremental = (Math.random() * 0.07) + .05;
+      this.tiltAngle = 0;
+    }
+    for(let i = 0; i < 120; i++) confettiPieces.push(new ConfettiPiece());
+
+    function drawConfetti() {
+      ctx.clearRect(0, 0, W, H);
+      for(let i = 0; i < confettiPieces.length; i++) {
+        let p = confettiPieces[i];
+        ctx.beginPath();
+        ctx.lineWidth = p.r / 2;
+        ctx.strokeStyle = p.color;
+        ctx.moveTo(p.x + p.tilt + p.r / 3, p.y);
+        ctx.lineTo(p.x + p.tilt, p.y + p.tilt + p.r);
+        ctx.stroke();
+      }
+      updateConfetti();
+    }
+    function updateConfetti() {
+      for(let i = 0; i < confettiPieces.length; i++) {
+        let p = confettiPieces[i];
+        p.y += p.d;
+        p.tiltAngle += p.tiltAngleIncremental;
+        p.tilt = Math.sin(p.tiltAngle) * 15;
+        if(p.y > H) {
+          p.x = Math.random() * W;
+          p.y = -10;
+        }
+      }
+    }
+    function resizeCanvas() {
+      W = window.innerWidth;
+      H = window.innerHeight;
+      canvas.width = W;
+      canvas.height = H;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    setInterval(drawConfetti, 16);
+  </script>
+</body>
+</html>
