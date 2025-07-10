@@ -23,6 +23,59 @@
       pointer-events: none;
       z-index: 100;
     }
+    .ribbon-wrapper {
+      width: 100vw;
+      display: flex;
+      justify-content: center;
+      position: relative;
+      z-index: 10;
+      margin-top: 0;
+      margin-bottom: -30px;
+    }
+    .ribbon {
+      position: relative;
+      background: linear-gradient(90deg, #ff69b4 0%, #ffe4e1 100%);
+      color: #fff;
+      font-family: 'Segoe Script', cursive;
+      font-size: 1.5em;
+      padding: 16px 54px;
+      border-radius: 40px;
+      box-shadow: 0 4px 24px #ff69b4aa, 0 1.5px 0 #fff inset;
+      display: inline-block;
+      animation: ribbonPop 1.2s cubic-bezier(.68,-0.55,.27,1.55);
+      overflow: visible;
+      letter-spacing: 2px;
+    }
+    .ribbon span {
+      position: relative;
+      z-index: 2;
+      text-shadow: 0 2px 8px #ffb6c1, 0 1px 0 #fff;
+    }
+    .ribbon::before, .ribbon::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: 32px;
+      height: 32px;
+      background: radial-gradient(circle at 60% 40%, #fff8fa 60%, #ff69b4 100%);
+      border-radius: 50%;
+      z-index: 1;
+      transform: translateY(-50%);
+      box-shadow: 0 0 18px #ffb6c1aa;
+    }
+    .ribbon::before {
+      left: -38px;
+      background: radial-gradient(circle at 60% 40%, #fff8fa 60%, #ff69b4 100%);
+    }
+    .ribbon::after {
+      right: -38px;
+      background: radial-gradient(circle at 40% 60%, #fff8fa 60%, #ff69b4 100%);
+    }
+    @keyframes ribbonPop {
+      0% { transform: scaleX(0.7) scaleY(0.7) translateY(-40px); opacity: 0; }
+      60% { transform: scaleX(1.08) scaleY(1.08) translateY(8px); opacity: 1; }
+      100% { transform: scaleX(1) scaleY(1) translateY(0); opacity: 1; }
+    }
     .cake {
       margin-top: 40px;
       position: relative;
@@ -112,20 +165,49 @@
       letter-spacing: 2px;
       animation: popIn 1.2s cubic-bezier(.68,-0.55,.27,1.55);
       text-align: center;
+      background: linear-gradient(90deg, #ffb6c1 40%, #fff 60%);
+      border-radius: 18px;
+      padding: 10px 24px;
+      box-shadow: 0 2px 18px #ffb6c1aa;
+      margin-bottom: 10px;
     }
     .birthday-message {
       margin: 30px 0 0 0;
-      background: rgba(255,255,255,0.85);
+      background: rgba(255,255,255,0.92);
       color: #d72660;
       font-size: 1.25em;
       border-radius: 24px;
       box-shadow: 0 2px 18px #ffb6c1aa;
-      padding: 24px 28px;
+      padding: 28px 32px;
       max-width: 90vw;
       text-align: center;
       line-height: 1.7;
       font-family: 'Segoe Script', 'Comic Sans MS', cursive, sans-serif;
       animation: popIn 1.5s 0.2s cubic-bezier(.68,-0.55,.27,1.55) backwards;
+      position: relative;
+      z-index: 2;
+    }
+    .birthday-message::before {
+      content: "💖";
+      position: absolute;
+      left: 18px;
+      top: 18px;
+      font-size: 1.5em;
+      opacity: 0.3;
+      animation: heartPulse 2s infinite;
+    }
+    .birthday-message::after {
+      content: "💖";
+      position: absolute;
+      right: 18px;
+      bottom: 18px;
+      font-size: 1.5em;
+      opacity: 0.3;
+      animation: heartPulse 2s infinite 1s;
+    }
+    @keyframes heartPulse {
+      0%, 100% { transform: scale(1);}
+      50% { transform: scale(1.3);}
     }
     .signature {
       margin-top: 32px;
@@ -135,6 +217,12 @@
       text-align: center;
       letter-spacing: 1px;
       opacity: 0.85;
+      background: rgba(255,255,255,0.7);
+      border-radius: 16px;
+      padding: 10px 24px;
+      box-shadow: 0 2px 12px #ffb6c1aa;
+      display: inline-block;
+      animation: popIn 1.2s 0.5s cubic-bezier(.68,-0.55,.27,1.55) backwards;
     }
     .balloon {
       position: absolute;
@@ -165,11 +253,23 @@
       .cake { width: 120px; height: 120px; }
       .cake-base, .cake-layer, .cake-icing { left: 0; right: 0; margin: auto; }
       .signature { font-size: 1em; }
+      .ribbon { font-size: 1em; padding: 10px 18px; }
+      .ribbon::before, .ribbon::after {
+        width: 18px;
+        height: 18px;
+        left: -20px;
+        right: -20px;
+      }
     }
   </style>
 </head>
 <body>
   <canvas class="confetti" id="confetti"></canvas>
+  <div class="ribbon-wrapper">
+    <div class="ribbon">
+      <span>🌟 To the Brightest Star: Subhadra 🌟</span>
+    </div>
+  </div>
   <!-- Balloons -->
   <div class="balloon" style="left:10vw; top:30px; animation-delay:0s;">
     <svg width="48" height="64">
@@ -191,25 +291,9 @@
   </div>
   <!-- Cake -->
   <div class="cake">
-    <!-- Bottom Layer -->
     <div class="cake-base"></div>
-    <!-- Middle Layer -->
-    <div class="cake-layer" style="width:120px;height:32px;left:30px;bottom:80px;background:linear-gradient(90deg,#fff 60%,#ffe0b2 100%);border-radius:60px 60px 30px 30px/32px 32px 20px 20px;z-index:4;box-shadow:0 2px 8px #fff8;"></div>
-    <!-- Top Layer -->
-    <div class="cake-layer" style="width:80px;height:22px;left:50px;bottom:104px;background:linear-gradient(90deg,#fff 60%,#ffe0b2 100%);border-radius:40px 40px 18px 18px/22px 22px 12px 12px;z-index:5;box-shadow:0 1px 4px #fff8;"></div>
-    <!-- Bottom Icing -->
+    <div class="cake-layer"></div>
     <div class="cake-icing"></div>
-    <!-- Middle Icing -->
-    <div class="cake-icing" style="width:120px;height:14px;left:30px;bottom:98px;background:linear-gradient(90deg,#ff69b4 60%,#ffb6c1 100%);border-radius:60px 60px 12px 12px/14px 14px 10px 10px;z-index:6;box-shadow:0 1px 4px #ff69b488;"></div>
-    <!-- Top Icing -->
-    <div class="cake-icing" style="width:80px;height:8px;left:50px;bottom:120px;background:linear-gradient(90deg,#ff69b4 60%,#ffb6c1 100%);border-radius:40px 40px 8px 8px/8px 8px 6px 6px;z-index:7;box-shadow:0 1px 2px #ff69b488;"></div>
-    <!-- Sprinkles -->
-    <div style="position:absolute;left:38px;bottom:74px;width:8px;height:8px;border-radius:50%;background:#ffd700;z-index:8;"></div>
-    <div style="position:absolute;left:60px;bottom:74px;width:8px;height:8px;border-radius:50%;background:#87ceeb;z-index:8;"></div>
-    <div style="position:absolute;left:82px;bottom:74px;width:8px;height:8px;border-radius:50%;background:#ff69b4;z-index:8;"></div>
-    <div style="position:absolute;left:104px;bottom:74px;width:8px;height:8px;border-radius:50%;background:#fff700;z-index:8;"></div>
-    <div style="position:absolute;left:126px;bottom:74px;width:8px;height:8px;border-radius:50%;background:#b39ddb;z-index:8;"></div>
-    <!-- Candle -->
     <div class="cake-candle">
       <div class="cake-flame"></div>
     </div>
@@ -279,7 +363,12 @@
       canvas.height = H;
     }
     window.addEventListener('resize', resizeCanvas);
-    setInterval(drawConfetti, 16);
+    resizeCanvas();
+    function animate() {
+      drawConfetti();
+      requestAnimationFrame(animate);
+    }
+    animate();
   </script>
 </body>
 </html>
